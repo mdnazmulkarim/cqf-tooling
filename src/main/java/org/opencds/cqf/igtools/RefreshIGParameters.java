@@ -15,4 +15,5 @@ public class RefreshIGParameters {
     public Boolean includePatientScenarios;
     public Boolean versioned;
     public String fhirUri;
+    public String libraryName;
 }

@@ -12,10 +12,12 @@ import ca.uhn.fhir.context.FhirContext;
 
 public class TestCaseProcessor
 {         
-    public static void refreshTestCases(String path, IOUtils.Encoding encoding, FhirContext fhirContext)
+    public static void refreshTestCases(String path, IOUtils.Encoding encoding, FhirContext fhirContext, String libraryName)
     {
-        List<String> libaryTestCasePaths = IOUtils.getDirectoryPaths(path, false); 
-        for (String libraryTestCasePath : libaryTestCasePaths) {
+        Iterator<String> libraryTestCasePaths = IOUtils.getDirectoryPaths(path, false).stream().filter(
+            directoryPath -> libraryName.isEmpty() ? true : directoryPath.endsWith(libraryName)).iterator(); 
+        while (libraryTestCasePaths.hasNext()) {
+            String libraryTestCasePath = libraryTestCasePaths.next();
             List<String> testCasePaths = IOUtils.getDirectoryPaths(libraryTestCasePath, false); 
             for (String testCasePath : testCasePaths) {
                 List<String> paths = IOUtils.getFilePaths(testCasePath, true);

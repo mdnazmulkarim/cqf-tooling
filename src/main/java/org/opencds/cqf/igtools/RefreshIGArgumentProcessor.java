@@ -30,6 +30,7 @@ public class RefreshIGArgumentProcessor {
     public static final String[] INCLUDE_PATIENT_SCENARIOS_OPTIONS = {"p", "include-patients"};
     public static final String[] VERSIONED_OPTIONS = {"v", "versioned"};
     public static final String[] FHIR_URI_OPTIONS = {"fs", "fhir-uri"};   
+    public static final String[] LIBRARY_NAME_OPTIONS = {"ln", "library-name"};  
 
     public OptionParser build() {
         OptionParser parser = new OptionParser();
@@ -37,9 +38,11 @@ public class RefreshIGArgumentProcessor {
         OptionSpecBuilder igPathBuilder = parser.acceptsAll(asList(IG_PATH_OPTIONS),"Limited to a single version of FHIR.");
         OptionSpecBuilder igVersionBuilder = parser.acceptsAll(asList(IG_VERSION_OPTIONS),"If ommitted the root of the IG Path will be used.");
         OptionSpecBuilder fhirUriBuilder = parser.acceptsAll(asList(FHIR_URI_OPTIONS),"If ommitted the final bundle will not be loaded to a FHIR server.");
-    
+        OptionSpecBuilder libraryNameBuilder = parser.acceptsAll(asList(LIBRARY_NAME_OPTIONS), "If ommitted all primary libraries will be bundled.");
+           
         OptionSpec<String> igPath = igPathBuilder.withRequiredArg().describedAs("root directory of the ig");
-        OptionSpec<String> igVersion = igVersionBuilder.withOptionalArg().describedAs("ig fhir version");     
+        OptionSpec<String> igVersion = igVersionBuilder.withOptionalArg().describedAs("ig fhir version");   
+        OptionSpec<String> libraryName = libraryNameBuilder.withOptionalArg().describedAs("name of single primary library to bundle");  
 
         //TODO: FHIR user / password (and other auth options)
         OptionSpec<String> fhirUri = fhirUriBuilder.withOptionalArg().describedAs("uri of fhir server");  
@@ -71,6 +74,7 @@ public class RefreshIGArgumentProcessor {
         Boolean includePatientScenarios = options.has(INCLUDE_PATIENT_SCENARIOS_OPTIONS[0]);
         Boolean versioned = options.has(VERSIONED_OPTIONS[0]);
         String fhirUri = (String)options.valueOf(FHIR_URI_OPTIONS[0]);
+        String libraryName = (String)options.valueOf(LIBRARY_NAME_OPTIONS[0]);
     
         RefreshIGParameters ip = new RefreshIGParameters();
         ip.igPath = igPath;
@@ -81,6 +85,7 @@ public class RefreshIGArgumentProcessor {
         ip.includePatientScenarios = includePatientScenarios;
         ip.versioned = versioned;
         ip.fhirUri = fhirUri;
+        ip.libraryName = libraryName;
        
         return ip;
     }
