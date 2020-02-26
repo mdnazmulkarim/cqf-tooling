@@ -209,10 +209,11 @@ public abstract class BaseLibraryGenerator<L extends IBaseResource, T extends Ba
 
     private ArrayList<String> getIncludedLibraries(String cql) {
         int includeDefinitionIndex = cql.indexOf("include");
+        ArrayList<String> relatedArtifacts = new ArrayList<>();
+        if (includeDefinitionIndex == -1) return relatedArtifacts;
         String[] includedDefsAndBelow = cql.substring(includeDefinitionIndex).split("\\n");
 
-        int index = 0; 
-        ArrayList<String> relatedArtifacts = new ArrayList<>();
+        int index = 0;
         while (includedDefsAndBelow[index].startsWith("include")) {
             String includedLibraryName = includedDefsAndBelow[index].replace("include ", "").split(" version ")[0];
             String includedLibraryVersion = includedDefsAndBelow[index].replace("include ", "").split(" version ")[1].replaceAll("\'", "").split(" called")[0];

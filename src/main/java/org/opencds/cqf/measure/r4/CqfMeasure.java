@@ -900,6 +900,15 @@ public class CqfMeasure extends Measure {
             return definition;
         }
 
+        @Override
+        public Object getUserData(String s) {
+            return null;
+        }
+
+        @Override
+        public void setUserData(String s, Object o) {
+
+        }
     }
 
     public static class VersionedTerminologyRef extends TerminologyRef {
@@ -947,6 +956,16 @@ public class CqfMeasure extends Measure {
             }
 
             return definition;
+        }
+
+        @Override
+        public Object getUserData(String s) {
+            return null;
+        }
+
+        @Override
+        public void setUserData(String s, Object o) {
+
         }
     }
 

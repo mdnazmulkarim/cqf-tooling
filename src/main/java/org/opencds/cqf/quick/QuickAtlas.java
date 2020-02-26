@@ -11,7 +11,7 @@ import java.util.TreeMap;
 
 public class QuickAtlas {
 
-    // Container for the QiCore-defined profiles (StructureDefinition.type -> StructureDefinition)
+    // Container for the QiCore-defined profiles (StructureDefinition.name -> StructureDefinition)
     private Map<String, StructureDefinition> qicoreProfiles = new TreeMap<>();
     public Map<String, StructureDefinition> getQicoreProfiles() {
         return qicoreProfiles;
@@ -157,7 +157,8 @@ public class QuickAtlas {
                     qicoreExtensions.put(sd.getUrl(), sd);
                 }
                 else {
-                    qicoreProfiles.put(sd.getType(), sd);
+                    // qicoreProfiles.put(sd.getType(), sd);
+                    qicoreProfiles.put(sd.getName(), sd);
                     qicoreUrlToType.put(sd.getUrl(), sd.getType());
                 }
             }
