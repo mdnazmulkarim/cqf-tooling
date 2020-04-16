@@ -1,0 +1,130 @@
+<div xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+    <table class="grid dict">
+        <tr th:if="${resource.id.exists()}">
+            <th scope="row"><b>Id: </b></th>
+            <td style="padding-left: 25px; padding-right: 25px;" th:text="${resource.id}"></td>
+        </tr>
+        <tr>
+            <th scope="row"><b>Type: </b></th>
+            <td style="padding-right: 25px;" th:narrative="${resource.type}"></td>
+        </tr>
+        <th:block th:each="ident, iter : ${resource.identifier}">
+            <tr style="vertical-align: top;">
+                <th th:if="${iter.index == 0}" th:rowspan="${iter.size}"  scope="row"><b>Identifier: </b></th>
+                <td style="padding-left: 25px; padding-right: 25px;">
+                    <b>system: </b> <span th:text="${ident.system}"></span>
+                    <br/>
+                    <b>value: </b> <span th:text="${ident.value}"></span>
+                </td>
+            </tr>
+        </th:block>
+        <tr  th:if="${resource.version.exists()}">
+            <th scope="row"><b>Version: </b></th>
+            <td style="padding-left: 25px; padding-right: 25px;" th:text="${resource.version}"></td>
+        </tr>
+        <tr th:if="${resource.title.exists()}">
+            <th scope="row"><b>Title: </b></th>
+            <td style="padding-left: 25px; padding-right: 25px;" th:text="${resource.title}"></td>
+        </tr>
+        <tr th:if="${resource.status.exists()}">
+            <th scope="row"><b>Status: </b></th>
+            <td style="padding-left: 25px; padding-right: 25px;" th:text="${resource.status.value}"></td>
+        </tr>
+        <tr th:if="${resource.description.exists()}">
+            <th scope="row"><b>Description: </b></th>
+            <td style="padding-left: 25px; padding-right: 25px;" th:narrative="${resource.description}"></td>
+        </tr>
+        <tr th:if="${resource.purpose.exists()}">
+            <th scope="row"><b>Purpose: </b></th>
+            <td style="padding-left: 25px; padding-right: 25px;" th:narrative="${resource.purpose}"></td>
+        </tr>
+        <tr th:if="${resource.usage.exists()}">
+            <th scope="row"><b>Usage: </b></th>
+            <td style="padding-left: 25px; padding-right: 25px;" th:narrative="${resource.usage}"></td>
+        </tr>
+        <th:block th:each="context, iter : ${resource.useContext}">
+            <tr>
+                <th th:if="${iter.index == 0}" th:rowspan="${iter.size}" scope="row"><b>Use Context: </b></th>
+                <td style="padding-left: 25px; padding-right: 25px;" th:narrative="${context}"></td>
+            </tr>
+        </th:block>
+        <th:block th:each="topics, iter : ${resource.topic}">
+            <tr style="vertical-align: top;">
+                <th th:if="${iter.index == 0}" th:rowspan="${iter.size}" scope="row"><b>Topic: </b></th>
+                <td style="padding-right: 25px;" th:narrative="${topics}"></td>
+            </tr>
+        </th:block>
+        <th:block th:each="related, iter : ${resource.relatedArtifact}">
+            <tr style="vertical-align: top;">
+                <th th:if="${iter.index == 0}" th:rowspan="${iter.size}"  scope="row"><b>Related: </b></th>
+                <td style="padding-left: 25px; padding-right: 25px;" th:narrative="${related}"></td>
+            </tr>
+        </th:block>
+        <th:block th:each="param, iter : ${resource.parameter}">
+            <tr style="vertical-align: top;">
+                <th th:if="${iter.index == 0}" th:rowspan="${iter.size}" scope="row"><b>Parameter: </b></th>
+                <td style="padding-left: 25px; padding-right: 25px;">
+                    <span th:if="${param.name.exists()}">
+                        <b>name: </b>
+                        <span th:text="${param.name.value}"></span>
+                        <br/>
+                    </span>
+                    <span th:if="${param.use.exists()}">
+                        <b>use: </b>
+                        <span th:text="${param.use.value}"></span>
+                        <br/>
+                    </span>
+                    <span th:if="${param.min.exists()}">
+                        <b>minimum cardinality: </b>
+                        <span th:text="${param.min}"></span>
+                        <br/>
+                    </span>
+                    <span th:if="${param.max.exists()}">
+                        <b>maximum cardinality: </b>
+                        <span th:text="${param.max}"></span>
+                        <br/>
+                    </span>
+                    <span th:if="${param.documentation.exists()}">
+                        <b>documentation: </b>
+                        <span th:text="${param.documentation}"></span>
+                        <br/>
+                    </span>
+                    <span th:if="${param.type.exists()}">
+                        <b>type: </b>
+                        <span th:text="${param.type.value}"></span>
+                        <br/>
+                    </span>
+                    <span th:if="${param.profile.exists()}">
+                        <b>profile: </b>
+                        <span th:text="${param.profile}"></span>
+                        <br/>
+                    </span>
+                    <p style="margin-bottom: 5px;"></p>
+                </td>
+            </tr>
+        </th:block>
+        <th:block th:each="dataReq, iter : ${resource.dataRequirement}">
+            <tr style="vertical-align: top;">
+                <th th:if="${iter.index == 0}" th:rowspan="${iter.size}" scope="row" ><b>Data Requirements: </b></th>
+                <td style="padding-left: 25px; padding-right: 25px;" th:narrative="${dataReq}"></td>
+            </tr>
+        </th:block>
+        <th:block th:each="con, iter : ${resource.content}">
+            <tr th:if="${con.contentType ~ 'text/cql'}" style="vertical-align: top;">
+                <th scope="row" ><b>Content: </b></th>
+                <td style="padding-left: 25px; padding-right: 25px;"><b>type: </b><span th:text="${con.contentType}"></span></td>
+            </tr>
+            <tr th:if="${con.contentType ~ 'text/cql'}">
+                <td colspan="2" style="padding-left: 25px; padding-right: 25px;">
+                    <th:block th:if="${con.data is not null }" >
+                        <pre><code th:class="${'language-cql'}" th:text="${new java.lang.String(con.data)}"></code></pre>
+                    </th:block>
+                    <th:block th:if="${con.data is null }" >
+                        <span><i>&lt;content is empty&gt;</i></span>
+                    </th:block>
+                </td>
+            </tr>
+        </th:block >
+    </table>
+</div>

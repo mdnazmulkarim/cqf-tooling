@@ -1,0 +1,32 @@
+<th:block th:if="${resource.exists()}">
+    <p style="margin-bottom: 5px;" th:if="${resource.type.exists()}">
+        <b>type: </b>
+        <span th:text="${resource.type.value}"></span>
+    </p>
+    <p style="margin-bottom: 5px;" th:if="${resource.label.exists()}">
+        <b>label: </b>
+        <span th:text="${resource.label}"></span>
+    </p>
+    <p style="margin-bottom: 5px;" th:if="${resource.display.exists()}">
+        <b>display: </b>
+        <span th:text="${resource.display}"></span>
+    </p>
+    <p style="margin-bottom: 5px;" th:if="${resource.citation.exists()}">
+        <b>citation: </b>
+        <br/>
+        <span th:text="${resource.citation}"></span>
+    </p>
+    <p style="margin-bottom: 5px;" th:if="${resource.url.exists()}">
+        <b>url: </b>
+        <span th:text="${resource.url}"></span>
+    </p>
+    <p style="margin-bottom: 5px;" th:if="${resource.document.exists()}">
+        <b>document: </b>
+        <span th:narrative="${resource.document}"></span>
+    </p>
+    <p style="margin-bottom: 5px;" th:if="${resource.resource.exists()}">
+        <b>resource: </b>
+        <br/>
+        <span th:text="${resource.resource}"></span>
+    </p>
+</th:block>

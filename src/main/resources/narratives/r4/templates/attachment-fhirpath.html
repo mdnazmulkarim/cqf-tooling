@@ -1,0 +1,18 @@
+<th:block th:if="${resource.exists()}">
+    <p style="margin-bottom: 5px;" th:if="${resource.contentType.exists()}">
+        <b>content type: </b>
+        <span th:text="${resource.contentType.value}"></span>
+    </p>
+    <p style="margin-bottom: 5px;" th:if="${resource.language.exists()}">
+        <b>language: </b>
+        <span th:text="${resource.language.value}"></span>
+    </p>
+    <p style="margin-bottom: 5px;" th:if="${resource.url.exists()}">
+        <b>url: </b>
+        <span th:text="${resource.url}"></span>
+    </p>
+    <p style="margin-bottom: 5px;" th:if="${resource.title.exists()}">
+        <b>title: </b>
+        <span th:text="${resource.title}"></span>
+    </p>
+</th:block>

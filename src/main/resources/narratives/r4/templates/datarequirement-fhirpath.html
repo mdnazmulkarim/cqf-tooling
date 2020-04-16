@@ -1,0 +1,69 @@
+<th:block th:if="${resource.exists()}">
+    <p style="margin-bottom: 5px;" th:if="${resource.type.exists()}">
+        <b>type: </b>
+        <span th:text="${resource.type.value}"></span>
+    </p>
+
+    <p style="margin-bottom: 5px;" th:each="pro : ${resource.profile}">
+        <b>profile: </b>
+        <span th:text="${pro}"></span>
+    </p>
+
+    <p style="margin-bottom: 5px;" th:each="must : ${resource.mustSupport}">
+        <b>must support: </b>
+        <span th:text="${must}"></span>
+    </p>
+
+    <p style="margin-bottom: 5px;" th:each="cFilter : ${resource.codeFilter}">
+        <b>code filter:</b>
+        <br/>
+        <span style="padding-left: 25px;" th:if="${cFilter.path.exists()}">
+            <b>path: </b>
+            <span th:text="${cFilter.path}"></span>
+        </span>
+        <br  th:if="${cFilter.hasValueSet()}" />
+        <span style="padding-left: 25px;" th:if="${cFilter.valueSet.exists()}">
+            <b>valueset: </b>
+            <span th:text="${cFilter.valueSet}"></span>
+        </span>
+        <br th:if="${cFilter.code.exists()}" />
+        <span style="padding-left: 25px;" th:each="codings : ${cFilter.code}">
+            <br />
+            <b>coding:</b>
+            <span style="padding-left: 25px;" th:narrative="${codings}"></span>
+        </span>
+    </p>
+
+    <p style="margin-bottom: 5px;" th:each="dFilter : ${resource.dateFilter}">
+        <b>date filter:</b>
+        <span style="padding-left: 25px;" th:if="${cFilter.path.exists()}">
+            <b>path: </b>
+            <span th:text="${dFilter.path}"></span>
+        </span>
+        <br/>
+        <span th:if="${dFilter.value.is(FHIR.dateTime)}">
+            <b>date time: </b>
+            <span th:narrative="${dFilter.value}"></span>
+        </span>
+        <span th:if="${dFilter.value.is(FHIR.period)}">
+            <b>date period: </b>
+            <span style="padding-left: 25px;" th:if="${dFilter.value.start.exists()}">
+                <br/>
+                <b>start: </b>
+                <span th:narrative="${dFilter.value.start}"></span>
+            </span>
+            <span style="padding-left: 25px;" th:if="${dFilter.value.end.exists()}">
+                <b>end: </b>
+                <span th:narrative="${dFilter.value.end}"></span>
+            </span>
+        </span>
+        <span th:if="${dFilter.value.is(FHIR.Duration)}">
+            <b>date duration: </b>
+            <br/>
+            <span style="padding-left: 25px;">
+                <b>duration: </b>
+                <span th:narrative="${dFilter.value}"></span>
+            </span>
+        </span>
+    </p>
+</th:block>

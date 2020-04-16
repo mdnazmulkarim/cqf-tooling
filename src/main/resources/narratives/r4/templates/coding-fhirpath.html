@@ -1,0 +1,16 @@
+<th:block th:if="${resource.exists()}">
+    <span style="padding-left: 25px;" th:if="${resource.system.exists()}">
+        <b>system: </b>
+        <span th:text="${resource.system}"></span>
+        <br th:if="${resource.code.exists() or resource.display.exists()}" />
+    </span>
+    <span style="padding-left: 25px;" th:if="${resource.code.exists()}">
+        <b>code: </b>
+        <span th:text="${resource.code}"></span>
+        <br th:if="${resource.display.exists()}" />
+    </span>
+    <span style="padding-left: 25px;" th:if="${resource.display.exists()}">
+        <b>display: </b>
+        <span th:text="${resource.display}"></span>
+    </span>
+</th:block>

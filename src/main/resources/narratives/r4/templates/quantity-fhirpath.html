@@ -1,0 +1,11 @@
+<th:block th:if="${resource.exists()}">
+    <span th:if="${resource.value.comparator.exists()}">
+            <span style="padding-left: 25px;" th:text="${resource.value.comparator.value}"></span>
+        </span>
+    <span th:if="${resource.value.value.exists()}">
+            <span style="padding-left: 25px;" th:text="${resource.value.value}"></span>
+        </span>
+    <span th:if="${resource.value.unit.exists()}">
+            <span style="padding-left: 25px;" th:text="${resource.value.unit}"></span>
+        </span>
+</th:block>

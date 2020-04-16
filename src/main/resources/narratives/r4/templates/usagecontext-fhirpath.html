@@ -1,0 +1,24 @@
+<th:block th:if="${resource.exists()}">
+    <p style="padding-left: 25px; margin-bottom: 5px;" th:if="${resource.code.exists()}">
+        <b>Code: </b>
+        <span th:narrative="${resource.code}"></span>
+    </p>
+    <p style="padding-left: 25px; margin-bottom: 5px;" th:if="${resource.value.is(FHIR.CodeableConcept)}">
+        <b>valueCodeableConcept: </b>
+        <br/>
+        <span th:narrative="${resource.value}"></span>
+    </p>
+    <p style="padding-left: 25px; margin-bottom: 5px;" th:if="${resource.value.is(FHIR.Quantity)}">
+        <b>valueQuantity: </b>
+        <span th:narrative="${resource.value}"></span>
+    </p>
+    <p style="padding-left: 25px; margin-bottom: 5px;" th:if="${resource.value.is(FHIR.Range)}">
+        <b>valueRange: </b>
+        <span th:if="${resource.value.low.exists()}">
+            <span style="padding-left: 25px;" th:narrative="${resource.value.low}"></span>
+        </span>
+        <span th:if="${resource.value.high.exists()}">
+            <span style="padding-left: 25px;" th:narrative="${resource.value.high}"></span>
+        </span>
+    </p>
+</th:block>
